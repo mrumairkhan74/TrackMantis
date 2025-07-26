@@ -31,11 +31,16 @@ function App() {
                 <Dashboard />
               </ProtectedRoute>
             } />
-            <Route path='/mybugs' element={
-              <ProtectedRoute>
-                <MyBugs />
-              </ProtectedRoute>
-            } />
+            <Route
+              path='/mybugs'
+              allowedRoles={['user', 'tester', 'developer']}
+              element={
+                <ProtectedRoute allowedRoles={['user', 'tester', 'developer']}>
+                  <MyBugs />
+                </ProtectedRoute>
+              }
+            />
+
             <Route path='/bugDetails/:id' element={
               <ProtectedRoute >
                 <BugReportDetail />

@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     } finally {
       setUser(null);
       sessionStorage.removeItem('user');
+      sessionStorage.removeItem('token');
     }
   };
 

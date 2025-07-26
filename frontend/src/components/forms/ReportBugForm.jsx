@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 const ReportBugForm = () => {
+
+  Aos.init();
   const [screenshots, setScreenshots] = useState([]);
   const [previewUrls, setPreviewUrl] = useState([]);
   const [documentFiles, setDocumentFiles] = useState([]);
@@ -74,13 +77,14 @@ const ReportBugForm = () => {
     const files = Array.from(e.target.files);
     setDocumentFiles(files);
   };
-  
+
 
   return (
     <>
       <ToastContainer position='top-right' />
-      <div className="flex flex-col items-center px-6 md:px-[250px] mt-10">
-        <form className="w-full bg-white shadow-md rounded-lg p-5 space-y-6" onSubmit={handleSubmitBug} >
+      <div className="flex flex-col items-center px-6 md:px-[250px] mt-10" data-aos="zoom-in" data-aos-easing="linear"
+        data-aos-duration="2000">
+        <form className="w-full bg-white shadow-md rounded-lg p-5 space-y-6 overflow-hidden" onSubmit={handleSubmitBug} >
 
           {/* Title & Project */}
           <div className="flex flex-col md:flex-row gap-5">
@@ -150,9 +154,9 @@ const ReportBugForm = () => {
                 <div className="flex flex-wrap justify-center gap-4">
                   {previewUrls.map((url, index) => (
                     <div key={index} className="relative w-[200px] h-[150px]">
-                      <img src={url} alt={`preview-${index}`} className="w-full h-full object-cover rounded-md" />
+                      <img loading="lazy" src={url} alt={`preview-${index}`} className="w-full h-full object-cover rounded-md" />
                       <button
-                      title='preview'
+                        title='preview'
                         type="button"
                         onClick={() => {
                           URL.revokeObjectURL(previewUrls[index]);
@@ -223,7 +227,8 @@ const ReportBugForm = () => {
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-end gap-4">
+          <div className="flex justify-end gap-4" data-aos="fade-up" data-aos-easing="linear"
+                data-aos-duration="2000">
             <button type="button" className="px-4 py-2 border border-gray-400 rounded-md hover:bg-gray-100">Cancel</button>
             <button type="submit" className="px-4 py-2 bg-slate-600 text-white rounded-md hover:bg-slate-700">Submit Bug Report</button>
           </div>

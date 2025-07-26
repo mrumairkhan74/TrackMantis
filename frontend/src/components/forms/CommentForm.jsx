@@ -4,8 +4,10 @@ import { AuthContext } from '../Context/AuthContext';
 import { useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify'
 const apiUrl = import.meta.env.VITE_BACKEND_API;
-
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 const CommentForm = () => {
+  Aos.init();
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [error, setError] = useState('');
@@ -84,7 +86,7 @@ const CommentForm = () => {
         {comments.map((comment) => (
           <div key={comment._id} className="comment shadow-md shadow-gray-300 rounded-md py-1 px-3 mx-0 my-5">
             <div className="flex items-center gap-2 p-2">
-              <img
+              <img loading="lazy"
                 src={comment.createdBy.userImage || '/default.webp'}
                 alt={comment.createdBy.userName}
                 className="w-10 h-10 rounded-full object-cover border-1 border-slate-500"

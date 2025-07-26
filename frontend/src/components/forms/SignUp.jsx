@@ -3,8 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify'
 import axios from 'axios'
 const apiUrl = import.meta.env.VITE_BACKEND_API
-
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 const Signup = () => {
+    Aos.init();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -44,8 +46,9 @@ const Signup = () => {
     return (
         <>
             <ToastContainer position='top-right' />
-            <div className=" w-full min-h-screen flex items-center justify-center">
-                <div className="bg-white shadow-xl rounded-2xl w-[90%] max-w-md p-8">
+            <div className=" w-full min-h-screen flex items-center justify-center" data-aos="flip-left" data-aos-easing="linear"
+                data-aos-duration="2000">
+                <div className="bg-white shadow-xl rounded-2xl w-[90%] max-w-md p-8 overflow-hidden">
                     <h1 className="text-3xl md:text-4xl font-bold text-center text-slate-600 font-[Poppins] mb-8">Signup</h1>
 
                     <form onSubmit={handleSubmit}>
@@ -101,6 +104,8 @@ const Signup = () => {
                             <p className='text-gray-500'>Already have an Account?</p> <Link className='text-slate-700' to={'/login'}>Login</Link>
                         </div>
                         <button
+                            data-aos="fade-up" data-aos-easing="linear"
+                            data-aos-duration="2000"
                             title='Signup submit'
                             type="submit"
                             className="w-full py-3 mt-4 rounded-lg text-white font-semibold text-lg bg-gradient-to-r from-slate-600 to-slate-900 hover:from-slate-900 hover:to-slate-500 transition-all duration-300"

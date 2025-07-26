@@ -4,9 +4,15 @@ import { AuthContext } from './Context/AuthContext';
 import { useParams } from 'react-router';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+
+import 'aos/dist/aos.css';
+import Aos from 'aos';
+
+// BackendApi Url
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 
 const MyReportedBugs = () => {
+  Aos.init();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [bugs, setBugs] = useState([]);
@@ -70,7 +76,8 @@ const MyReportedBugs = () => {
 
       {bugs.length > 0 ? (
         bugs.map((bug) => (
-          <div key={bug._id} className="flex flex-col space-y-1 mb-6">
+          <div key={bug._id} className="flex flex-col space-y-1 mb-6" data-aos="fade-left" data-aos-easing="linear"
+          data-aos-duration="2000">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center shadow-md rounded-md p-4 ">
               <div className={`flex-1 border-l-4 ${priorityColors[bug.priority]} pl-4`}>
                 <h2 className="text-xl font-bold tracking-wide mb-1">{bug.bugTitle}</h2>

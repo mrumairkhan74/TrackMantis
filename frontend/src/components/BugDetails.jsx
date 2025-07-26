@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Loading from './Loading/Loading';
-
+import 'aos/dist/aos.css';
+import Aos from 'aos';
+// backendUrlAPi
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 
 const BugDetails = () => {
+  Aos.init();
   const [bugs, setBugs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -126,15 +129,17 @@ const BugDetails = () => {
           filteredBugs.map((bug) => (
             <div
               key={bug._id}
-              className="flex justify-between items-start md:flex-row flex-col md:items-center  gap-4 border-b border-gray-200 py-5"
+              className="flex justify-between items-start md:flex-row flex-col md:items-center  gap-4 border-b border-gray-200 py-5" data-aos="fade-left" data-aos-easing="linear"
+                data-aos-duration="2000"
             >
               <Link
+              
                 to={`/bugDetails/${bug._id}`}
                 className={`flex gap-3 w-full md:w-3/4 border-l-8 ${priorityColors[bug.priority]} p-4 rounded-md hover:bg-gray-100 transition-all`}
               >
                 <div className="w-[80px] h-[60px] bg-gray-200 rounded-md overflow-hidden">
                   {bug.screenShots?.[0]?.url ? (
-                    <img
+                    <img loading="lazy"
                       src={bug.screenShots[0].url}
                       alt="Bug Screenshot"
                       className="w-full h-full object-cover"
@@ -146,7 +151,8 @@ const BugDetails = () => {
                   )}
                 </div>
 
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1" data-aos="fade-up" data-aos-easing="linear"
+                data-aos-duration="2000">
                   <h2 className="text-xl font-bold text-gray-800">{bug.bugTitle}</h2>
                   <p className="text-sm text-gray-600 line-clamp-2">{bug.description}</p>
                   <ul className="flex flex-wrap gap-2 text-sm mt-2">

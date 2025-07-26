@@ -3,10 +3,12 @@ import axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router';
-
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 
 const HandleBugUpdate = () => {
+    Aos.init();
     const { id } = useParams()
     const [status, setStatus] = useState('')
     const navigate = useNavigate()

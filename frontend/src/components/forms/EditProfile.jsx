@@ -3,10 +3,12 @@ import axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import { useParams } from 'react-router';
-
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 
 const EditProfile = () => {
+    Aos.init();
     const { user, login } = useContext(AuthContext);
     const [name, setName] = useState(user?.name || '');
     const [image, setImage] = useState(null);
@@ -47,7 +49,9 @@ const EditProfile = () => {
             <ToastContainer position="top-right" />
             <form
                 onSubmit={handleSubmit}
-                className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md"
+                className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md overflow-hidden"
+                data-aos="flip-left" data-aos-easing="linear"
+                data-aos-duration="2000"
             >
                 <h2 className="text-2xl font-bold text-slate-700 mb-4 font-[Poppins]">
                     Edit Profile
@@ -56,7 +60,7 @@ const EditProfile = () => {
                 <div className="mb-4">
                     <label className="block text-gray-700 mb-2">Profile Image</label>
                     <div className="flex items-center gap-4">
-                        <img
+                        <img loading="lazy"
                             src={preview || '/fallback.jpg'}
                             alt="Preview"
                             className="w-16 h-16 rounded-full object-cover border"
@@ -77,7 +81,9 @@ const EditProfile = () => {
                 </div>
 
                 <button
-                title='Save Edit Profile'
+                    data-aos="fade-up" data-aos-easing="linear"
+                    data-aos-duration="2000"
+                    title='Save Edit Profile'
                     type="submit"
                     className="w-full bg-gradient-to-r from-slate-600 to-slate-900 text-white py-2 px-4 rounded hover:opacity-90 transition"
                 >

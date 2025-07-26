@@ -6,9 +6,13 @@ import axios from 'axios';
 
 import CommentForm from './forms/CommentForm';
 import Loading from './Loading/Loading';
-const apiUrl = import.meta.env.VITE_BACKEND_API
 
+// BackendApiUrl
+const apiUrl = import.meta.env.VITE_BACKEND_API
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 const BugReportDetail = () => {
+    Aos.init()
     const { id } = useParams();
     const [bug, setBugs] = useState({})
     const [loading, setLoading] = useState(false)
@@ -39,7 +43,8 @@ const BugReportDetail = () => {
             {loading && <Loading />}
 
             {error && <p className='text-center flex items-center justify-center text-red-500 text-2xl'>{error}</p>}
-            <div className="w-full min-h-screen p-6 md:px-28">
+            <div className="w-full min-h-screen p-6 md:px-28" data-aos="flip-left" data-aos-easing="linear"
+                data-aos-duration="2000">
 
                 {/* BUG TITLE & ACTIONS */}
                 <div className="flex justify-between items-center mb-6">
@@ -98,7 +103,7 @@ const BugReportDetail = () => {
                 {bug.screenShots && bug.screenShots.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                         {bug.screenShots.map((img, i) => (
-                            <img key={i} src={img.url} alt={`Screenshot ${i + 1}`} className="rounded shadow" />
+                            <img loading="lazy" key={i} src={img.url} alt={`Screenshot ${i + 1}`} className="rounded shadow" />
                         ))}
                     </div>
                 )}

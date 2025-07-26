@@ -6,6 +6,7 @@ import { ToastContainer,toast } from 'react-toastify';
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 
 const Table = () => {
+    
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

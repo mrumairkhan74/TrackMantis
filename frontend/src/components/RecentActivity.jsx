@@ -2,8 +2,13 @@ import React, { useEffect, useState, } from 'react'
 import axios from 'axios'
 import Loading from './Loading/Loading'
 import { Link } from 'react-router'
+
+import 'aos/dist/aos.css';
+import Aos from 'aos';
+// BackendApi Url
 const apiUrl = import.meta.env.VITE_BACKEND_API
 const RecentActivity = () => {
+    Aos.init()
     const [bugs, setBugs] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -37,7 +42,8 @@ const RecentActivity = () => {
             <h1 className='p-2 lg:px-[150px] lg:px-0 text-2xl font-bold tracking-wide m-5 font-[Poppins]'>RecentActivity</h1>
             {/* 1st */}
             {!loading && bugs.slice(0, 3).map(bug => (
-                <Link to={`bugDetails/${bug._id}`} key={bug._id} className="flex items-center justify-between md:py-[12px] md:px-[150px] p-2 shadow-md my-3 ">
+                <Link to={`bugDetails/${bug._id}`} key={bug._id} className="flex items-center justify-between md:py-[12px] md:px-[150px] p-2 shadow-md my-3 " data-aos="fade-up" data-aos-easing="linear"
+                data-aos-duration="2000">
                     <div className={`border-l-8 ${bug.priority === "Critical" ? "border-red-700 " :
                         bug.priority === "High" ? "border-red-600 " :
                             bug.priority === "Medium" ? "border-yellow-400 " :

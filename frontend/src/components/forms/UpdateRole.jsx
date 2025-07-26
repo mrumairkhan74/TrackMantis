@@ -3,13 +3,15 @@ import axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router';
-
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 
 const UpdateRole = () => {
+    Aos.init();
     const [role, setRole] = useState('')
     const navigate = useNavigate()
-    const {id} = useParams()
+    const { id } = useParams()
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent form reload
         try {
@@ -29,7 +31,9 @@ const UpdateRole = () => {
             <ToastContainer position="top-right" />
             <form
                 onSubmit={handleSubmit}
-                className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md"
+                className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md overflow-hidden"
+                data-aos="flip-left" data-aos-easing="linear"
+                data-aos-duration="2000"
             >
                 <h2 className="text-2xl font-bold text-slate-700 mb-4 font-[Poppins]">
                     Update Role
@@ -50,7 +54,9 @@ const UpdateRole = () => {
                 </div>
 
                 <button
-                title='Submit'
+                    data-aos="fade-up" data-aos-easing="linear"
+                    data-aos-duration="2000"
+                    title='Submit'
                     type="submit"
                     className="w-full bg-gradient-to-r from-slate-600 to-slate-900 text-white py-2 px-4 rounded hover:opacity-90 transition"
                 >

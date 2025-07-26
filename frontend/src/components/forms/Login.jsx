@@ -2,29 +2,30 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../Context/AuthContext';
 const apiUrl = import.meta.env.VITE_BACKEND_API
-
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
 const Login = () => {
-    const {login} = useContext(AuthContext)
+    const { login } = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-
+    Aos.init()
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             const res = await axios.post(`${apiUrl}/user/login`, { email, password }, { withCredentials: true });
-    
+
             const { user, token } = res.data;
-    
+
             toast.success("Login Successfully");
-    
+
             // Call login with both user and token
             login({ user, token });
-    
+
             setTimeout(() => {
                 if (user.role === 'admin') {
                     navigate('/dashboard');
@@ -32,7 +33,7 @@ const Login = () => {
                     navigate('/');
                 }
             }, 2000);
-    
+
         } catch (error) {
             console.error(error);
             toast.error(error?.response?.data?.error || "Login failed");
@@ -44,8 +45,9 @@ const Login = () => {
     return (
         <>
             <ToastContainer position='top-right' />
-            <div className=" w-full min-h-screen flex items-center justify-center">
-                <div className="bg-white shadow-xl rounded-2xl w-[90%] max-w-md p-8">
+            <div className=" w-full min-h-screen flex items-center justify-center" data-aos="flip-right" data-aos-easing="linear"
+                data-aos-duration="2000">
+                <div className="bg-white shadow-xl rounded-2xl w-[90%] max-w-md p-8 overflow-hidden">
                     <h1 className="text-3xl md:text-4xl font-bold text-center text-slate-600 font-[Poppins] mb-8">Login</h1>
 
                     <form onSubmit={handleLogin}>
@@ -84,12 +86,14 @@ const Login = () => {
                         </div>
 
                         <button
-                        title='Login submit'
-                        onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                                handleLogin()
-                            }
-                        }}
+                            data-aos="fade-up" data-aos-easing="linear"
+                            data-aos-duration="2000"
+                            title='Login submit'
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    handleLogin()
+                                }
+                            }}
                             type="submit"
                             className="w-full py-3 mt-4 rounded-lg text-white font-semibold text-lg bg-gradient-to-r from-slate-600 to-slate-900 hover:from-slate-900 hover:to-slate-500 transition-all duration-300"
                         >
