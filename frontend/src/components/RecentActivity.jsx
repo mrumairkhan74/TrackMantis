@@ -1,88 +1,96 @@
-import React, { useEffect, useState, } from 'react'
-import axios from 'axios'
-import Loading from './Loading/Loading'
-import { Link } from 'react-router'
-
-import 'aos/dist/aos.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Loading from './Loading/Loading';
+import { Link } from 'react-router-dom';
 import Aos from 'aos';
-// BackendApi Url
-const apiUrl = import.meta.env.VITE_BACKEND_API
+import 'aos/dist/aos.css';
+
+const apiUrl = import.meta.env.VITE_BACKEND_API;
+
 const RecentActivity = () => {
-    Aos.init()
-    const [bugs, setBugs] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+  Aos.init();
+  const [bugs, setBugs] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    const fetchBugs = async () => {
-        setLoading(true)
-        setError(null)
-        try {
-            const res = await axios.get(`${apiUrl}/bug/`);
-            setBugs(res.data.bugs)
-        }
-        catch (error) {
-            return setError('Something went wrong while fetching bugs Detail')
-        }
-        finally {
-            setLoading(false)
-        }
+  const fetchBugs = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await axios.get(`${apiUrl}/bug/`);
+      setBugs(res.data.bugs);
+    } catch (error) {
+      setError('Something went wrong while fetching bug details');
+    } finally {
+      setLoading(false);
     }
-    useEffect(() => {
-        fetchBugs()
-    }, [])
+  };
 
-    const priorityColors = {
-        Critical: 'border-red-600',
-        High: 'border-orange-500',
-        Medium: 'border-yellow-400',
-        Low: 'border-green-500'
-    };
-    return (
-        <div className='w-full rounded-md shadow-md bg-white mt-3 md:px-[250px]  p-5 block m-auto '>
-            <h1 className='p-2 lg:px-[150px] lg:px-0 text-2xl font-bold tracking-wide m-5 font-[Poppins]'>RecentActivity</h1>
-            {/* 1st */}
-            {!loading && bugs.slice(0, 3).map(bug => (
-                <Link to={`bugDetails/${bug._id}`} key={bug._id} className="flex items-center justify-between md:py-[12px] md:px-[150px] p-2 shadow-md my-3 " data-aos="fade-up" data-aos-easing="linear"
-                data-aos-duration="2000">
-                    <div className={`border-l-8 ${bug.priority === "Critical" ? "border-red-700 " :
-                        bug.priority === "High" ? "border-red-600 " :
-                            bug.priority === "Medium" ? "border-yellow-400 " :
-                                bug.priority === "Low" ? "border-slate-400 " :
-                                    "bg-gray-100 text-gray-600"} p-5 `}>
-                        <h2 className='md:text-xl text-[16px] font-[Poppins]'>New Bug reported by <span className='font-bold'> {bug.createdBy}</span></h2>
-                        <p className='md:text-xl text-[10px] text-gray-500'>{bug.bugTitle} </p>
-                        <div className="flex gap-2 m-2 p-2">
-                            <p title='Priority'
-                                className={`p-2 text-[10px] rounded-full cursor-pointer
-                            ${bug.priority === "Critical" ? "bg-red-300 text-red-700 " :
-                                        bug.priority === "High" ? "bg-red-200 text-red-600 " :
-                                            bug.priority === "Medium" ? "bg-yellow-200 text-yellow-600 " :
-                                                "bg-green-200 text-green-600 "
-                                    }`
-                                }>
+  useEffect(() => {
+    fetchBugs();
+  }, []);
 
-                                {bug.priority}
-                            </p>
-                            <p className='p-2 text-[10px] rounded-full bg-slate-100 text-slate-400' title='device'>{bug.device}</p>
-                            <p className='p-2 text-[10px] rounded-full bg-slate-100 text-slate-400' title='OperatingSystem'>{bug.operatingSystem}</p>
-                        </div>
-                    </div>
-                    <div className="flex flex-col md:flex-row items-center gap-3">
-                        <div className={` ${bug.status === 'open'
-                            ? 'bg-green-200 text-green-700'
-                            : bug.status === 'inProgress'
-                                ? 'bg-yellow-200 text-yellow-700'
-                                : bug.status === 'close'
-                                    ? 'bg-blue-100 text-blue-700'
-                                    : 'bg-red-200 text-red-700'
-                            }  md:text-[16px] text-[10px] p-2 rounded-[20px]`}>{bug.status}</div>
-                        <div className="bg-gray-100 text-gray-500 md:text-[16px] text-[8px] p-2 rounded-[20px]">{new Date(bug.createdAt).toDateString()}</div>
-                    </div>
-                </Link>
-            ))}
+  return (
+    <div className='w-full bg-white rounded-md shadow-md p-4 md:px-20 mt-4'>
+      <h1 className='text-xl sm:text-2xl font-bold tracking-wide mb-6 font-[Poppins] text-center md:text-left'>Recent Activity</h1>
 
-        </div>
-    )
-}
+      {!loading && bugs.slice(0, 3).map(bug => (
+        <Link
+          to={`bugDetails/${bug._id}`}
+          key={bug._id}
+          className='flex flex-col md:flex-row justify-between gap-4 items-start md:items-center border-l-8 shadow-sm p-4 my-4 bg-white'
+          data-aos='fade-up'
+          data-aos-easing='linear'
+          data-aos-duration='2000'
+          style={{
+            borderLeftColor:
+              bug.priority === 'Critical' ? '#dc2626' :
+              bug.priority === 'High' ? '#f97316' :
+              bug.priority === 'Medium' ? '#facc15' :
+              bug.priority === 'Low' ? '#10b981' : '#e5e7eb'
+          }}
+        >
+          <div className='flex-1'>
+            <h2 className='text-sm sm:text-base md:text-lg font-semibold font-[Poppins]'>
+              New Bug reported by <span className='font-bold'>{bug.createdBy}</span>
+            </h2>
+            <p className='text-xs sm:text-sm text-gray-500 mt-1'>{bug.bugTitle}</p>
+            <div className='flex flex-wrap gap-2 mt-3'>
+              <p className={`px-3 py-1 text-xs rounded-full 
+                ${bug.priority === 'Critical' ? 'bg-red-200 text-red-700' :
+                  bug.priority === 'High' ? 'bg-orange-200 text-orange-700' :
+                    bug.priority === 'Medium' ? 'bg-yellow-200 text-yellow-700' :
+                      'bg-green-200 text-green-700'
+                }`}
+              >
+                {bug.priority}
+              </p>
+              <p className='px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600'>{bug.device}</p>
+              <p className='px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-600'>{bug.operatingSystem}</p>
+            </div>
+          </div>
 
-export default RecentActivity
+          <div className='flex flex-row md:flex-col gap-2 md:items-end items-start mt-4 md:mt-0'>
+            <div className={`px-3 py-1 text-xs md:text-sm rounded-full font-semibold 
+              ${bug.status === 'open' ? 'bg-green-200 text-green-700' :
+                bug.status === 'inProgress' ? 'bg-yellow-200 text-yellow-700' :
+                  bug.status === 'close' ? 'bg-blue-100 text-blue-700' :
+                    'bg-red-200 text-red-700'
+              }`}
+            >
+              {bug.status}
+            </div>
+            <div className='px-3 py-1 text-xs md:text-sm rounded-full bg-gray-100 text-gray-600'>
+              {new Date(bug.createdAt).toDateString()}
+            </div>
+          </div>
+        </Link>
+      ))}
+
+      {loading && <Loading />}
+      {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+    </div>
+  );
+};
+
+export default RecentActivity;
