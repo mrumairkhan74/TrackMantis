@@ -12,9 +12,9 @@ const HeroSection = () => {
             <p className='p-3 text-[18px] md:text-xl lg:text-2xl font-[Poppins]  text-gray-500 text-center' data-aos="fade-left" data-aos-easing="linear"
                 data-aos-duration="2000">Bug Track helps Development Teams Collaborate effectively to identify, prioritize and fix Software issues . </p>
             <div className="flex items-center justify-center md:gap-4 gap-2">
-                <Link to={'/reportbug'} className="bg-gradient-to-r from-slate-600 to-slate-900 p-4 hover:text-slate-700 hover:border-2 hover:bg-none rounded-md md:text-xl text-white text-[12px] font-bold tracking-wide" title="Report A bug" data-aos="fade-right" data-aos-easing="linear"
+                <Link to={'/reportbug'} className="bg-gradient-to-r from-slate-600 to-slate-900 p-4 hover:text-slate-700 hover:border-2 hover:bg-none p-3 rounded-md md:text-[16px] text-white text-[10px] font-bold tracking-wide" title="Report A bug" data-aos="fade-right" data-aos-easing="linear"
                     data-aos-duration="2000" >Report a Bug</Link>
-                <Link to={'/bug'} className="text-slate-700 border-2 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-900 hover:text-white p-4 rounded-md md:text-xl  text-[12px] font-bold tracking-wide" title="view Bug" data-aos="fade-left" data-aos-easing="linear"
+                <Link to={'/bug'} className="text-slate-700 border-2 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-900 hover:text-white p-3 rounded-md md:text-[16px] text-[12px] font-bold tracking-wide" title="view Bug" data-aos="fade-left" data-aos-easing="linear"
                 data-aos-duration="2000" >View Bugs</Link>
             </div>
         </div>
