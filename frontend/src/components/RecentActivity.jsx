@@ -38,7 +38,7 @@ const RecentActivity = () => {
         <Link
           to={`bugDetails/${bug._id}`}
           key={bug._id}
-          className='flex flex-col md:flex-row justify-between gap-4 items-start md:items-center border-l-8 shadow-sm p-4 my-4 bg-white'
+          className='flex flex-col md:flex-row justify-between gap-4 items-start md:items-center border-l-8 shadow-sm p-4 my-4 bg-white overflow-hidden'
           data-aos='fade-up'
           data-aos-easing='linear'
           data-aos-duration='2000'
