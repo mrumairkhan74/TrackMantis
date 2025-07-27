@@ -23,9 +23,14 @@ function App() {
           <Route element={<Layout />}>
             <Route path='/' element={<Home />} />
             <Route path='/bug' element={<Bug />} />
-            <Route path='/reportbug' element={<ReportBugs />} />
+
 
             {/* ✅ Protected Routes */}
+            <Route path='/reportbug' element={
+              <ProtectedRoute allowedRoles={['user','tester','developer']}>
+                <ReportBugs /> 
+              </ProtectedRoute>
+            } />
             <Route path='/dashboard' element={
               <ProtectedRoute allowedRoles={['admin']}>
                 <Dashboard />

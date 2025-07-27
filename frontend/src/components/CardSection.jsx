@@ -15,7 +15,7 @@ const CardSection = () => {
                 <h1 className="text-2xl text-center font-bold pl-5 tracking-wide p-2 font-[Poppins]">Intutive Dashboard</h1>
                 <p className='text-start p-5 text-gray-500 text-xl'>Easy-to-use interface that gives you a complete visibility into reported issues with powerful filtering and sorting option    </p>
             </div>
-            <div className="flex flex-col bg-white md:w-[300px] md:h-[400px]  m-5 rounded-md shadow-md shadow-gray-500 items-center md:scale-110 md:hover:scale-120 transition-all duration-1000 ease-in-out cursor-pointer" title='Comprehensive Tracking' data-aos="flip-left" data-aos-easing="linear"
+            <div className="flex flex-col bg-white md:w-[300px] md:h-[400px] m-5 rounded-md shadow-md shadow-gray-500 items-center md:scale-110 md:hover:scale-120 transition-all duration-1000 ease-in-out cursor-pointer" title='Comprehensive Tracking' data-aos="flip-left" data-aos-easing="linear"
                 data-aos-duration="2000">
                 <GoShieldCheck className='w-[100px] h-[100px] m-5 text-slate-700 p-4' />
                 <h1 className="text-2xl text-center font-bold  tracking-wide p-2 font-[Poppins]">Comprehensive Tracking</h1>
