@@ -65,11 +65,12 @@ const createUser = async (req, res) => {
         // In your loginUser and createUser functions, update cookie settings:
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Enable in production
-            sameSite: 'strict',
-            maxAge: 30 * 60 * 1000, // 30 minutes to match JWT expiration
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'None',
             path: '/',
-        });
+            maxAge: 30 * 60 * 1000 // 30 minutes
+          });
+          
 
         return res.status(200).json({
             message: "User Created successfully", user: {
@@ -121,11 +122,12 @@ const loginUser = async (req, res) => {
         // In your loginUser and createUser functions, update cookie settings:
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Enable in production
-            sameSite: 'strict',
-            maxAge: 30 * 60 * 1000, // 30 minutes to match JWT expiration
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'None',
             path: '/',
-        });
+            maxAge: 30 * 60 * 1000 // 30 minutes
+          });
+          
 
         return res.status(200).json({
             message: "Login Successfully", user: {
@@ -261,10 +263,10 @@ const logoutUser = async (req, res) => {
         res.clearCookie('token', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            path: '/',
-        });
-
+            sameSite: 'None',
+            path: '/'
+          });
+          
         // If you have admin tokens or other cookies
         res.clearCookie('adminToken', {
             httpOnly: true,
