@@ -21,12 +21,12 @@ const Navbar = () => {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/bug', label: 'Bug' },
-    { to: '/reportbug', label: 'Report Bug' }
   ];
   if (user?.role === 'admin') {
     navLinks.push({ to: '/dashboard', label: 'Dashboard' });
   } else if (['user', 'tester', 'developer'].includes(user?.role)) {
     navLinks.push({ to: '/mybugs', label: 'My Bugs' });
+    navLinks.push({ to: '/reportbug', label: 'Report Bug' });
   }
 
   return (
