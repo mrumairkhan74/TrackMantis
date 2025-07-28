@@ -27,8 +27,10 @@ function App() {
 
             {/* ✅ Protected Routes */}
             <Route path='/reportbug' element={
-
-                <ReportBugs /> 
+<ProtectedRoute>
+  <ReportBugs /> 
+</ProtectedRoute>
+                
 
             } />
             <Route path='/dashboard' element={
