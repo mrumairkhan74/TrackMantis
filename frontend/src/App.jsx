@@ -27,9 +27,9 @@ function App() {
 
             {/* ✅ Protected Routes */}
             <Route path='/reportbug' element={
-              <ProtectedRoute allowedRoles={['user','tester','developer']}>
+
                 <ReportBugs /> 
-              </ProtectedRoute>
+
             } />
             <Route path='/dashboard' element={
               <ProtectedRoute allowedRoles={['admin']}>
