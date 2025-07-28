@@ -9,6 +9,7 @@ const apiUrl = import.meta.env.VITE_BACKEND_API;
 
 const EditProfile = () => {
     Aos.init();
+    const [loading, setLoading] = useState(false)
     const { user, login } = useContext(AuthContext);
     const [name, setName] = useState(user?.name || '');
     const [image, setImage] = useState(null);
@@ -22,7 +23,7 @@ const EditProfile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true)
         try {
             const formData = new FormData();
             formData.append('name', name);
@@ -41,6 +42,8 @@ const EditProfile = () => {
             toast.success('Profile updated!');
         } catch (error) {
             toast.error(error.response?.data?.error || 'Something went wrong');
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -85,9 +88,10 @@ const EditProfile = () => {
                     data-aos-duration="2000"
                     title='Save Edit Profile'
                     type="submit"
+                    disabled={loading}
                     className="w-full bg-gradient-to-r from-slate-600 to-slate-900 text-white py-2 px-4 rounded hover:opacity-90 transition"
                 >
-                    Save Changes
+                    {loading ? 'Save Changes' : 'Saving...'}
                 </button>
             </form>
         </div>

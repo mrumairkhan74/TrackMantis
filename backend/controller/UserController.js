@@ -62,17 +62,18 @@ const createUser = async (req, res) => {
             role: user.role
         }, process.env.JWT_SECRET_KEY, { expiresIn: '30m' })
 
-        const isProduction = process.env.NODE_ENV === 'production'
+        const isProduction = process.env.NODE_ENV === 'production';
 
-        // In your loginUser and createUser functions, update cookie settings:
+        // In your loginUser and createUser functions
         res.cookie('token', token, {
             httpOnly: true,
-            secure: isProduction ? 'None',
-            sameSite: 'None',
+            secure: isProduction,             // ✅ true in production, false in development
+            sameSite: isProduction ? 'None' : 'Lax', // ✅ 'None' allows cross-site cookies (e.g., with frontend on different domain)
             path: '/',
             maxAge: 30 * 60 * 1000 // 30 minutes
-          });
-          
+        });
+
+
 
         return res.status(200).json({
             message: "User Created successfully", user: {
@@ -121,15 +122,19 @@ const loginUser = async (req, res) => {
             process.env.JWT_SECRET_KEY,
             { expiresIn: '30m' })
 
-        // In your loginUser and createUser functions, update cookie settings:
+
+        const isProduction = process.env.NODE_ENV === 'production';
+
+        // In your loginUser and createUser functions
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'None',
+            secure: isProduction,            
+            sameSite: isProduction ? 'None' : 'Lax',
             path: '/',
             maxAge: 30 * 60 * 1000 // 30 minutes
-          });
-          
+        });
+
+
 
         return res.status(200).json({
             message: "Login Successfully", user: {
@@ -267,8 +272,8 @@ const logoutUser = async (req, res) => {
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'None',
             path: '/'
-          });
-          
+        });
+
         // If you have admin tokens or other cookies
         res.clearCookie('adminToken', {
             httpOnly: true,

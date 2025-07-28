@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,8 +7,9 @@ import Aos from 'aos';
 
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 const ReportBugForm = () => {
-
+  const formRef = (null);
   Aos.init();
+  const [loading, setLoading] = useState(false)
   const [screenshots, setScreenshots] = useState([]);
   const [previewUrls, setPreviewUrl] = useState([]);
   const [documentFiles, setDocumentFiles] = useState([]);
@@ -26,6 +27,7 @@ const ReportBugForm = () => {
   const navigate = useNavigate();
 
   const handleSubmitBug = async (e) => {
+    setLoading(true)
     e.preventDefault();
     const formData = new FormData();
     formData.append('bugTitle', bugTitle);
@@ -61,8 +63,13 @@ const ReportBugForm = () => {
     } catch (error) {
       toast.error(error?.response?.data?.error || 'Upload failed');
     }
+    finally {
+      setLoading(false)
+    }
   };
-
+  const handleReset = () => {
+    formRef.current.reset(); // resets all form fields
+  };
 
 
 
@@ -84,7 +91,7 @@ const ReportBugForm = () => {
       <ToastContainer position='top-right' />
       <div className="flex flex-col items-center px-6 md:px-[250px] mt-10" data-aos="zoom-in" data-aos-easing="linear"
         data-aos-duration="2000">
-        <form className="w-full bg-white shadow-md rounded-lg p-5 space-y-6 overflow-hidden" onSubmit={handleSubmitBug} >
+        <form className="w-full bg-white shadow-md rounded-lg p-5 space-y-6 overflow-hidden" ref={formRef} onSubmit={handleSubmitBug} >
 
           {/* Title & Project */}
           <div className="flex flex-col md:flex-row gap-5">
@@ -228,9 +235,9 @@ const ReportBugForm = () => {
 
           {/* Buttons */}
           <div className="flex justify-end gap-4" data-aos="fade-up" data-aos-easing="linear"
-                data-aos-duration="2000">
-            <button type="button" className="px-4 py-2 border border-gray-400 rounded-md hover:bg-gray-100">Cancel</button>
-            <button type="submit" className="px-4 py-2 bg-slate-600 text-white rounded-md hover:bg-slate-700">Submit Bug Report</button>
+            data-aos-duration="2000">
+            <button type="button" className="px-4 py-2 border border-gray-400 rounded-md hover:bg-gray-100" onClick={handleReset}>Cancel</button>
+            <button type="submit" className="px-4 py-2 bg-slate-600 text-white rounded-md hover:bg-slate-700" disabled={loading}>{loading ? 'Submit Bug' : 'Submitting'}</button>
           </div>
         </form>
       </div>

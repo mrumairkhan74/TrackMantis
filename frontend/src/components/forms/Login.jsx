@@ -11,10 +11,12 @@ const Login = () => {
     const { login } = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     Aos.init()
 
     const handleLogin = async (e) => {
+        setLoading(true)
         e.preventDefault();
         try {
             const res = await axios.post(`${apiUrl}/user/login`, { email, password }, { withCredentials: true });
@@ -37,6 +39,8 @@ const Login = () => {
         } catch (error) {
             console.error(error);
             toast.error(error?.response?.data?.error || "Login failed");
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -94,10 +98,11 @@ const Login = () => {
                                     handleLogin()
                                 }
                             }}
+                            disabled={loading}
                             type="submit"
                             className="w-full py-3 mt-4 rounded-lg text-white font-semibold text-lg bg-gradient-to-r from-slate-600 to-slate-900 hover:from-slate-900 hover:to-slate-500 transition-all duration-300"
                         >
-                            Login
+                            {loading ? "Login..." : "Login"}
                         </button>
                     </form>
                 </div>

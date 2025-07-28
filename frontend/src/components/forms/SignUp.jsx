@@ -1,127 +1,75 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify'
-import axios from 'axios'
-const apiUrl = import.meta.env.VITE_BACKEND_API
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { AuthContext } from '../Context/AuthContext';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate, useParams } from 'react-router';
 import 'aos/dist/aos.css';
 import Aos from 'aos';
-const Signup = () => {
+const apiUrl = import.meta.env.VITE_BACKEND_API;
+
+const UpdateRole = () => {
     Aos.init();
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [image, setImage] = useState(null)
-
+    const [role, setRole] = useState('')
     const navigate = useNavigate()
+    const { id } = useParams()
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('password', password);
-        formData.append('image', image);
-
+        setLoading(true)
+        e.preventDefault(); // Prevent form reload
         try {
-            const res = await axios.post(`${apiUrl}/user/signup`, formData, {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            toast.success('Signup Successfully');
+            const res = await axios.put(`${apiUrl}/user/role/${id}`, { role }, { withCredentials: true });
+            toast.success('Role Updated Successfully');
             setTimeout(() => {
-                if (res.data.user.role === 'admin') {
-                    navigate('/dashboard');
-                } else {
-                    navigate('/');
-                }
-            }, 2000);
+                navigate('/dashboard');
+            }, 1000);
         } catch (error) {
-            toast.error(error?.response?.data?.error || 'Signup Failed');
+            toast.error(error.response?.data?.error || 'Something went wrong');
+        } finally {
+            setLoading(false)
         }
     };
 
 
-
     return (
-        <>
-            <ToastContainer position='top-right' />
-            <div className=" w-full min-h-screen flex items-center justify-center" data-aos="flip-left" data-aos-easing="linear"
-                data-aos-duration="2000">
-                <div className="bg-white shadow-xl rounded-2xl w-[90%] max-w-md p-8 overflow-hidden">
-                    <h1 className="text-3xl md:text-4xl font-bold text-center text-slate-600 font-[Poppins] mb-8">Signup</h1>
+        <div className="min-h-screen p-6 flex justify-center items-center bg-gray-100">
+            <ToastContainer position="top-right" />
+            <form
+                onSubmit={handleSubmit}
+                className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md overflow-hidden"
+                data-aos="flip-left" data-aos-easing="linear"
+                data-aos-duration="2000"
+            >
+                <h2 className="text-2xl font-bold text-slate-700 mb-4 font-[Poppins]">
+                    Update Role
+                </h2>
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-5">
-                            <label className="block text-gray-700 text-sm mb-1">Image <span className='text-red-500'>*</span></label>
-                            <input
-                                type="file"
-                                accept='image/*'
-                                autoComplete="off"
-                                className="w-full px-4 py-3 rounded-lg bg-gray-100 border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                required
-                                onChange={(e) => setImage(e.target.files[0])}
-                            />
-                        </div>
-                        <div className="mb-5">
-                            <label className="block text-gray-700 text-sm mb-1">Name <span className='text-red-500'>*</span></label>
-                            <input
-                                type="text"
-                                placeholder="Enter your name"
-                                autoComplete="off"
-                                className="w-full px-4 py-3 rounded-lg bg-gray-100 border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                required
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                        <div className="mb-5">
-                            <label className="block text-gray-700 text-sm mb-1">Email <span className='text-red-500'>*</span></label>
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                autoComplete="off"
-                                className="w-full px-4 py-3 rounded-lg bg-gray-100 border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-
-                        <div className="mb-5">
-                            <label className="block text-gray-700 text-sm mb-1">Password <span className='text-red-500'>*</span></label>
-                            <input
-                                type="password"
-                                placeholder="Enter your password"
-                                autoComplete="off"
-                                className="w-full px-4 py-3 rounded-lg bg-gray-100 border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-                        <div className="flex items-center justify-center gap-4">
-                            <p className='text-gray-500'>Already have an Account?</p> <Link className='text-slate-700' to={'/login'}>Login</Link>
-                        </div>
-                        <button
-                            data-aos="fade-up" data-aos-easing="linear"
-                            data-aos-duration="2000"
-                            title='Signup submit'
-                            type="submit"
-                            className="w-full py-3 mt-4 rounded-lg text-white font-semibold text-lg bg-gradient-to-r from-slate-600 to-slate-900 hover:from-slate-900 hover:to-slate-500 transition-all duration-300"
-                            onKeyDown={(e) => {
-                                if (e.key === "Enter") {
-                                    handleSubmit()
-                                }
-                            }}
-                        >
-                            Signup
-                        </button>
-                    </form>
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-2">User Role</label>
                 </div>
-            </div>
-        </>
+
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-1">Role</label>
+                    <select name="status" id="" value={role} onChange={(e) => setRole(e.target.value)}>
+                        <option value="" disabled>Select Role</option>
+                        <option value="user">User</option>
+                        <option value="tester">Tester</option>
+                        <option value="developer">Developer</option>
+                    </select>
+                </div>
+
+                <button
+                    data-aos="fade-up" data-aos-easing="linear"
+                    data-aos-duration="2000"
+                    title='Submit'
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-gradient-to-r from-slate-600 to-slate-900 text-white py-2 px-4 rounded hover:opacity-90 transition"
+                >
+                    {loading ? 'Save Changing' : 'Save Change'}
+                </button>
+            </form>
+        </div>
     );
 };
 
-export default Signup;
+export default UpdateRole;
