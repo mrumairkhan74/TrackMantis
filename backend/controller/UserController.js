@@ -62,10 +62,12 @@ const createUser = async (req, res) => {
             role: user.role
         }, process.env.JWT_SECRET_KEY, { expiresIn: '30m' })
 
+        const isProduction = process.env.NODE_ENV === 'production'
+
         // In your loginUser and createUser functions, update cookie settings:
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: isProduction ? 'None',
             sameSite: 'None',
             path: '/',
             maxAge: 30 * 60 * 1000 // 30 minutes
