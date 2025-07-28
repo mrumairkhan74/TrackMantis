@@ -12,7 +12,9 @@ const UpdateRole = () => {
     const [role, setRole] = useState('')
     const navigate = useNavigate()
     const { id } = useParams()
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault(); // Prevent form reload
         try {
             const res = await axios.put(`${apiUrl}/user/role/${id}`, { role }, { withCredentials: true });
@@ -22,6 +24,8 @@ const UpdateRole = () => {
             }, 1000);
         } catch (error) {
             toast.error(error.response?.data?.error || 'Something went wrong');
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -58,9 +62,10 @@ const UpdateRole = () => {
                     data-aos-duration="2000"
                     title='Submit'
                     type="submit"
+                    disabled={loading}
                     className="w-full bg-gradient-to-r from-slate-600 to-slate-900 text-white py-2 px-4 rounded hover:opacity-90 transition"
                 >
-                    Save Changes
+                    {loading ? 'Save Changing' : 'Save Change'}
                 </button>
             </form>
         </div>

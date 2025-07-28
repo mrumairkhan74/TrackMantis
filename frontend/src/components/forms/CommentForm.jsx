@@ -8,6 +8,7 @@ import 'aos/dist/aos.css';
 import Aos from 'aos';
 const CommentForm = () => {
   Aos.init();
+  const [loading, setLoading] = useState(false)
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [error, setError] = useState('');
@@ -33,6 +34,7 @@ const CommentForm = () => {
   // POST request with proper error handling
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     setError('');
 
     if (!user) return setError('You must be logged in to comment');
@@ -57,6 +59,9 @@ const CommentForm = () => {
     } catch (error) {
       console.error('Error posting comment:', error);
       setError(error.response?.data?.message || 'Failed to post comment');
+    }
+    finally {
+      setLoading(false)
     }
   };
 
@@ -113,7 +118,7 @@ const CommentForm = () => {
             <div className="flex justify-end items-center my-2">
 
               <button
-              title='Delete Comment'
+                title='Delete Comment'
                 onClick={() => deleteComment(comment._id)}
                 className='text-white bg-red-700 rounded-full px-2 py-1'
               >
@@ -143,7 +148,7 @@ const CommentForm = () => {
           />
           <div className='flex justify-end items-center'>
 
-            <button title='Post Comment' type="submit" className='bg-slate-700 text-white  p-2 rounded-md my-2 '>Post Comment</button>
+            <button title='Post Comment' type="submit" className='bg-slate-700 text-white  p-2 rounded-md my-2 ' disabled={loading}>{loading ? 'Post Comment' : 'Posting'}</button>
           </div>
         </form>
 
