@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { GiPrayingMantis } from 'react-icons/gi';
 import { AuthContext } from './Context/AuthContext';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
@@ -37,7 +36,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="text-2xl font-bold font-[Poppins] flex items-center gap-3 cursor-pointer" data-aos="fade-down" data-aos-easing="linear"
           data-aos-duration="1500" onClick={() => navigate('/')}>
-          <GiPrayingMantis className="text-3xl" />
+            <img src="./mantis.png" className='w-10 h-10 invert' alt="" />
           TrackMantis
         </div>
 
@@ -80,9 +79,9 @@ const Navbar = () => {
           ) : (
 
             <div className="flex items-center gap-2" >
-              <Link to={`/editProfile/${user.id}`} data-aos="fade-down" data-aos-easing="linear"
+              <Link to={`/editProfile/${user.id} `} data-aos="fade-down" data-aos-easing="linear"
                 data-aos-duration="2000"><img loading="lazy"
-                  src={user.image?.url || '/fallback.jpg'}
+                  src={user.image?.url || './default.webp'}
                   width={50}
                   height={50}
                   className="rounded-full w-[50px] h-[50px]  border-2 object-cover"
