@@ -34,9 +34,9 @@ const Navbar = () => {
       data-aos-duration="1000">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-2xl font-bold font-[Poppins] flex items-center gap-3 cursor-pointer" data-aos="fade-down" data-aos-easing="linear"
+        <div className="md:text-2xl text-[20px] font-bold font-[Poppins] flex items-center gap-3 cursor-pointer" data-aos="fade-down" data-aos-easing="linear"
           data-aos-duration="1500" onClick={() => navigate('/')}>
-            <img src="./mantis.png" className='w-10 h-10 invert' alt="" />
+            <img src="./mantis.png" className='md:w-10 md:h-10 invert w-5 h-5' alt="" />
           TrackMantis
         </div>
 
