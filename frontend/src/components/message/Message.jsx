@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { LuMessagesSquare } from "react-icons/lu";
 import { FaLocationArrow } from "react-icons/fa";
-
+import { GoDotFill } from "react-icons/go";
 
 const Message = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +24,7 @@ const Message = () => {
                 <div className="fixed bottom-24 right-6 w-80 bg-white text-black rounded-lg shadow-lg border-2 border-slate-400 z-50 flex flex-col h-[420px] overflow-hidden">
 
                     {/* Chat Header */}
-                    <div className="bg-slate-500 text-white p-3 text-center font-semibold rounded-t-lg">Live Chat</div>
+                    <div className="bg-slate-500 text-white p-3 text-center font-semibold rounded-t-lg flex items-center gap-2 justify-center"> Live Chat <GoDotFill className='text-green-500 linear animate-ping text-2xl duration-3000' /></div>
 
                     {/* Messages Area */}
                     <div className="flex-1 overflow-y-auto px-3 py-2 space-y-2">
