@@ -328,6 +328,14 @@ const UpdateUserRole = async (req, res) => {
     }
 }
 
+
+// In controller
+ const getOnlineUsers = async (req, res) => {
+  const users = await User.find({ online: true });
+  res.json(users);
+};
+
+
 module.exports = {
     createUser,
     loginUser,
@@ -336,5 +344,6 @@ module.exports = {
     updateUserById,
     logoutUser,
     DeleteUserById,
-    UpdateUserRole
+    UpdateUserRole,
+    getOnlineUsers
 }

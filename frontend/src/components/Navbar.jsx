@@ -144,7 +144,7 @@ const Navbar = () => {
             </>
           ) : (
             <div className="flex items-center gap-2">
-              <img loading="lazy" src={user.image?.url} width={"50px"} height={"50px"} alt="" />
+              <img loading="lazy" src={user.image?.url} className='rounded-full' width={"50px"} height={"50px"} alt="" />
               <button
                 title='Logout'
                 onClick={() => {
