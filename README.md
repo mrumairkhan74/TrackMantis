@@ -123,8 +123,7 @@ npm run dev
 
 ## 🌐 Live Demo
 
-> 🔗 [Live Site](https://your-live-url.com)  
-> 🔗 [Backend API](https://your-api-url.com/api)
+> 🔗 [Live Site](https://trackmantis.vercel.app)  
 
 ---
 
