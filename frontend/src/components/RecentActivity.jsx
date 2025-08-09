@@ -34,7 +34,7 @@ const RecentActivity = () => {
     <div className='w-full bg-white rounded-md shadow-md p-4 md:px-20 mt-4 overflow-hidden'>
       <h1 className='text-xl sm:text-2xl font-bold tracking-wide mb-6 font-[Poppins] text-center md:text-left'>Recent Activity</h1>
 
-      {!loading && bugs.slice(0, 3).map(bug => (
+      {!loading && bugs && bugs.slice(0, 3).map(bug => (
         <Link
           to={`bugDetails/${bug._id}`}
           key={bug._id}
