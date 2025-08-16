@@ -20,6 +20,7 @@ app.use(cookieParser());
 app.use('/user', require('./routes/UserRouter'));
 app.use('/bug', require('./routes/BugRouter'));
 app.use('/comment', require('./routes/CommentRouter'));
+app.use('/chat', require('./routes/ChatBotRouter'));
 
 // Socket Controller handles socket events
 
