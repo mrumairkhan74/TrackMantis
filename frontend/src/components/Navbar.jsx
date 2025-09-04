@@ -119,7 +119,7 @@ const Navbar = () => {
               key={link.to}
               to={link.to}
               onClick={() => setIsOpen(false)}
-              className="text-white"
+              className="text-white hover:underline hover:decoration-4 hover:underline-offset-5 transition-all ease-in-out duration-1000"
             >
               {link.label}
             </Link>

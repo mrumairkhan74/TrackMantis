@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
@@ -15,7 +15,7 @@ const HandleBugUpdate = () => {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent form reload
         try {
-            const res = await axios.put(`${apiUrl}/bug/${id}`, { status }, { withCredentials: true });
+            await axios.put(`${apiUrl}/bug/${id}`, { status }, { withCredentials: true });
             toast.success('Status Updated Successfully');
             setTimeout(() => {
                 navigate('/mybugs');

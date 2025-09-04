@@ -25,7 +25,7 @@ const BugDetails = () => {
     try {
       const res = await axios.get(`${apiUrl}/bug/`, { withCredentials: true });
       setBugs(res.data.bugs);
-    } catch (error) {
+    } catch {
       setError('Something went wrong while fetching bugs detail');
     } finally {
       setLoading(false);
@@ -130,10 +130,10 @@ const BugDetails = () => {
             <div
               key={bug._id}
               className="flex justify-between items-start md:flex-row flex-col md:items-center  gap-4 border-b border-gray-200 py-5" data-aos="fade-left" data-aos-easing="linear"
-                data-aos-duration="2000"
+              data-aos-duration="2000"
             >
               <Link
-              
+
                 to={`/bugDetails/${bug._id}`}
                 className={`flex gap-3 w-full md:w-3/4 border-l-8 ${priorityColors[bug.priority]} p-4 rounded-md hover:bg-gray-100 transition-all`}
               >
@@ -152,19 +152,19 @@ const BugDetails = () => {
                 </div>
 
                 <div className="flex flex-col gap-1" data-aos="fade-up" data-aos-easing="linear"
-                data-aos-duration="2000">
+                  data-aos-duration="2000">
                   <h2 className="text-xl font-bold text-gray-800">{bug.bugTitle}</h2>
                   <p className="text-sm text-gray-600 line-clamp-2">{bug.description}</p>
                   <ul className="flex flex-wrap gap-2 text-sm mt-2">
                     <li className="bg-gray-200 px-2 py-1 rounded">{bug.operatingSystem}</li>
                     <li
                       className={`px-2 py-1 rounded font-medium ${bug.severity === 'Blocker'
-                          ? 'bg-red-300 text-red-900'
-                          : bug.severity === 'Major'
-                            ? 'bg-orange-300 text-orange-900'
-                            : bug.severity === 'Minor'
-                              ? 'bg-yellow-300 text-yellow-900'
-                              : 'bg-blue-300 text-blue-900'
+                        ? 'bg-red-300 text-red-900'
+                        : bug.severity === 'Major'
+                          ? 'bg-orange-300 text-orange-900'
+                          : bug.severity === 'Minor'
+                            ? 'bg-yellow-300 text-yellow-900'
+                            : 'bg-blue-300 text-blue-900'
                         }`}
                     >
                       {bug.severity}
@@ -182,12 +182,12 @@ const BugDetails = () => {
                 <span
                   title='priority'
                   className={`px-3 py-1 text-sm rounded text-center w-fit ${bug.priority === 'Critical'
-                      ? 'bg-red-100 text-red-800'
-                      : bug.priority === 'High'
-                        ? 'bg-orange-200 text-orange-700'
-                        : bug.priority === 'Medium'
-                          ? 'bg-yellow-100 text-yellow-700'
-                          : 'bg-green-100 text-green-700'
+                    ? 'bg-red-100 text-red-800'
+                    : bug.priority === 'High'
+                      ? 'bg-orange-200 text-orange-700'
+                      : bug.priority === 'Medium'
+                        ? 'bg-yellow-100 text-yellow-700'
+                        : 'bg-green-100 text-green-700'
                     }`}
                 >
                   {bug.priority}
@@ -195,12 +195,12 @@ const BugDetails = () => {
                 <span
                   title='status'
                   className={`px-3 py-1 text-sm rounded text-center w-fit ${bug.status === 'open'
-                      ? 'bg-green-200 text-green-700'
-                      : bug.status === 'inProgress'
-                        ? 'bg-yellow-200 text-yellow-700'
-                        : bug.status === 'close'
-                          ? 'bg-red-100 text-red-700'
-                          : 'bg-red-200 text-red-700'
+                    ? 'bg-green-200 text-green-700'
+                    : bug.status === 'inProgress'
+                      ? 'bg-yellow-200 text-yellow-700'
+                      : bug.status === 'close'
+                        ? 'bg-red-100 text-red-700'
+                        : 'bg-red-200 text-red-700'
                     }`}
                 >
                   {bug.status}

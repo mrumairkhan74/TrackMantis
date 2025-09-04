@@ -19,7 +19,7 @@ const RecentActivity = () => {
     try {
       const res = await axios.get(`${apiUrl}/bug/`);
       setBugs(res.data.bugs);
-    } catch (error) {
+    } catch {
       setError('Something went wrong while fetching bug details');
     } finally {
       setLoading(false);

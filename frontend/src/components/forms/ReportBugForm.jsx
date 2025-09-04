@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -49,7 +49,7 @@ const ReportBugForm = () => {
     });
 
     try {
-      const res = await axios.post(`${apiUrl}/bug/create`, formData, {
+      await axios.post(`${apiUrl}/bug/create`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'

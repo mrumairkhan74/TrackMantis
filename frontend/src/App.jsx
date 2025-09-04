@@ -27,10 +27,10 @@ function App() {
 
             {/* ✅ Protected Routes */}
             <Route path='/reportbug' element={
-<ProtectedRoute>
-  <ReportBugs /> 
-</ProtectedRoute>
-                
+              <ProtectedRoute>
+                <ReportBugs />
+              </ProtectedRoute>
+
 
             } />
             <Route path='/dashboard' element={

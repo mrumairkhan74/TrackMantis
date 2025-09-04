@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify'
 const apiUrl = import.meta.env.VITE_BACKEND_API;
 import 'aos/dist/aos.css';
 import Aos from 'aos';
+import { useCallback } from 'react';
 const CommentForm = () => {
   Aos.init();
   const [loading, setLoading] = useState(false)
@@ -16,7 +17,7 @@ const CommentForm = () => {
   const { user } = useContext(AuthContext);
   const [uploadFile, setUploadFile] = useState('')
   // Properly formatted GET request
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     try {
       const res = await axios.get(`${apiUrl}/comment/bug/${bugId}`);
       setComments(res.data.comments || []);
@@ -24,12 +25,13 @@ const CommentForm = () => {
       console.error('Error fetching comments:', error);
       setError(error.response?.data?.message || 'Failed to load comments');
     }
-  };
+  }, [bugId]);
 
 
   useEffect(() => {
-    if (bugId) fetchComments();
-  }, [bugId]);
+    if (bugId)
+      fetchComments();
+  }, [bugId, fetchComments]);
 
   // POST request with proper error handling
   const handleSubmit = async (e) => {
@@ -69,7 +71,7 @@ const CommentForm = () => {
 
   const deleteComment = async (commentId) => {
     try {
-      const response = await axios.delete(
+      await axios.delete(
         `${apiUrl}/comment/${commentId}`,
         { withCredentials: true }
       );
