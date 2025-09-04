@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="frontend/public/mantis.png" alt="Mantis Logo" width="200"/>
+  <img src="frontend/public/mantis.png" alt="Mantis Logo" width="100"/>
 </p>
 
 # 🐞 TrackMantis – Bug Tracking System (MERN Stack)
