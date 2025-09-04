@@ -7,12 +7,15 @@ const groq = new Groq({
 const chat = async (req, res) => {
     try {
         const { message } = req.body;
+        const response = await fetch('https://trackmantis.vercel.app/');
+        const siteHTML = await response.text();
+        const siteContent = parseMainText(siteHTML);
 
         const AiReply = await groq.chat.completions.create({
             model: "llama-3.1-8b-instant",   // Groq's free chat model
             messages: [
-                { role: "system", content: "You are a helpful assistant." },
-                { role: "user", content: message },
+                { role: "system", content: "You are a TrackMantis assistant. Only answer using the content provided. if answer isn't in there, say:'Sorry, I don't have that information" },
+                { role: "user", content: `Question: ${message}\n\nSite Content:\n${siteContent}` },
             ],
         });
 
