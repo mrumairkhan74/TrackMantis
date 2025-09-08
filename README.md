@@ -82,12 +82,6 @@ TrackMantis/
 
 ---
 
-## 📸 Screenshots
-
-> _(Add screenshots or demo GIFs of the dashboard, bug form, comment system, etc.)_
-
----
-
 ## 🧪 Getting Started
 
 ### Prerequisites
