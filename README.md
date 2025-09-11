@@ -111,10 +111,12 @@ npm run dev
 ```
 
 ---
-MONGO_URI: Open MongoDB Altas and create Acc and go to databases and click on Connect and copy MongoURI and select nodejs version and then copy it .
-JWT_SECRET: use this in terminal (node -e "console.log(require('crypto').randomBytes(64).toString('hex'))") to generate a secretKey its depend on you how long key you need change bytes to 8,16,34,64,128,256 it upto you.
-CLOUDINARY_CLOUD_NAME: Create account on cloudinary and copy username which you write during creating.
-CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET: On dashbaord you can see both key and past it in you env file.
+### 🥷 .env Required Links
+
+- MONGO_URI: Open MongoDB Altas and create Acc and go to databases and click on Connect and copy MongoURI and select nodejs version and then copy it .
+- JWT_SECRET: use this in terminal (node -e "console.log(require('crypto').randomBytes(64).toString('hex'))") to generate a secretKey its depend on you how long key you need change bytes to 8,16,34,64,128,256 it upto you.
+- CLOUDINARY_CLOUD_NAME: Create account on cloudinary and copy username which you write during creating.
+- CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET: On dashbaord you can see both key and past it in you env file.
 ---
 
 ## 🌐 Live Demo
