@@ -74,7 +74,7 @@ const MyReportedBugs = () => {
     <div className="w-full min-h-screen px-4 md:px-[150px] py-6">
       <h1 className="text-3xl md:text-5xl font-[Poppins] tracking-[2px] mb-6">My Reported Bugs</h1>
 
-      {bugs.length < 0 ? (
+      {bugs.length === 0 ? (
         <p className="text-center text-gray-600">No Bugs Uploaded By You</p>
       ):(
         bugs.map((bug) => (
