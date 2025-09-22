@@ -188,11 +188,12 @@ const getBugByUserId = async (req, res) => {
 
         // Find all bugs created by this user
         const bugs = await Bug.find({ 'createdBy.userId': userId }).sort({ createdAt: -1 });
-
-        if (bugs.length === 0) {
-            return res.status(404).json({ error: "No bugs you reported" });
-        }
-
+if (bugs.length === 0) {
+    return res.status(200).json({
+        message: "No bugs you reported",
+        bugs: []
+    });
+}
         const formattedBugs = bugs.map(bug => ({
             _id: bug._id,
             bugTitle: bug.bugTitle,
